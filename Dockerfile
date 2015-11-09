@@ -38,6 +38,7 @@ RUN apt-get update
 ENV LD_PRELOAD libjemalloc.so.1
 
 COPY docker-entrypoint.sh /
+COPY init-tokudb.sh /docker-entrypoint-initdb.d/
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
 

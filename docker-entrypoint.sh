@@ -63,9 +63,6 @@ if [ "$1" = 'mysqld' ]; then
 			mysql+=( -p"${MYSQL_ROOT_PASSWORD}" )
 		fi
 
-		echo 'Enabling TokuDB'
-                ps_tokudb_admin --enable
-
 		if [ "$MYSQL_DATABASE" ]; then
 			echo "CREATE DATABASE IF NOT EXISTS \`$MYSQL_DATABASE\` ;" | "${mysql[@]}"
 			mysql+=( "$MYSQL_DATABASE" )
