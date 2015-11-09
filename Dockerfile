@@ -12,6 +12,7 @@ RUN echo 'deb http://repo.percona.com/apt jessie main' > /etc/apt/sources.list.d
 
 ENV PERCONA_MAJOR 5.6
 ENV PERCONA_VERSION 5.6.27-75.0-1.jessie
+ENV LD_PRELOAD libjemalloc.so.1
 
 # the "/var/lib/mysql" stuff here is because the mysql-server postinst doesn't have an explicit way to disable the mysql_install_db codepath besides having a database already "configured" (ie, stuff in /var/lib/mysql/mysql)
 # also, we set debconf keys to make APT a little quieter
@@ -33,9 +34,6 @@ RUN sed -Ei 's/^(bind-address|log)/#&/' /etc/mysql/my.cnf \
 	&& mv /tmp/my.cnf /etc/mysql/my.cnf
 
 VOLUME /var/lib/mysql
-
-RUN apt-get update
-ENV LD_PRELOAD libjemalloc.so.1
 
 COPY docker-entrypoint.sh /
 COPY init-tokudb.sh /docker-entrypoint-initdb.d/
