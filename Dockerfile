@@ -37,6 +37,7 @@ VOLUME /var/lib/mysql
 
 COPY docker-entrypoint.sh /
 COPY init-tokudb.sh /docker-entrypoint-initdb.d/
+COPY max_allowed_packet.cnf /etc/mysql/conf.d/
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
 
